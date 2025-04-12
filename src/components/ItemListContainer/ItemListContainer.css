@@ -1,0 +1,14 @@
+.container-cards {
+    display: flex;
+    padding: 3rem;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.container-titulo {
+    text-align: center;
+}
+
+.container-titulo:hover {
+    color: #b1a571;
+}
