@@ -4,13 +4,13 @@ import Item from '../Item/Item';
 import Loader from '../Loader/Loader';
 import ItemDetail from '../ItemDetail/ItemDetail';
 import './ItemListContainer.css';
+import ProductCard from "../ProductCard/ProductCard";
 import { useParams } from 'react-router-dom';
-import {productos} from '../../productos.js'
+import { productos } from '../../productos.js';
 import { db } from '../../firebaseConfig.js';
-import {collection, addDoc} from 'firebase/firestore'
+import { collection, addDoc } from 'firebase/firestore';
 
 function ItemListContainer() {
-
     const [todosLosProductos, setTodosLosProductos] = useState([]);
     const [misProductos, setMisProductos] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -42,28 +42,35 @@ function ItemListContainer() {
 
     // const cargarProductos = () => {
     //     let refCollection = collection(db, "productos");
-    //     
-    //     productos. forEach((elemento) => {
-    //     addDoc(refCollection, elemento);
+    //     productos.forEach((elemento) => {
+    //         addDoc(refCollection, elemento);
     //     });
     // };
 
     return (
         <div className="container-cards">
             {
-            loading ? <Loader /> :
-            misProductos.map(producto => (
-                <Item 
-                key={producto.id} 
-                id={producto.id} 
-                nombre={producto.nombre} 
-                precio={producto.precio} 
-                />
-            ))
+                loading ? <Loader /> :
+                misProductos.map(producto => (
+                    <div key={producto.id} className="card-con-imagen">
+                        {producto.image && (
+                            <img 
+                                src={producto.image} 
+                                alt={producto.nombre} 
+                                className="imagen-producto"
+                            />
+                        )}
+                        <Item 
+                            id={producto.id} 
+                            nombre={producto.nombre} 
+                            precio={producto.precio} 
+                        />
+                    </div>
+                ))
             }
-            {/*<button onClick={cargarProductos}>Cargar muchos productos</button>*/}
+            {/* <button onClick={cargarProductos}>Cargar muchos productos</button> */}
         </div>
-        );
-    };
+    );
+};
 
 export default ItemListContainer;
