@@ -1,0 +1,41 @@
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+    background-color: #928962;
+    color: wheat;
+    z-index: 100;
+}
+
+.footer__correo {
+    color: #eee;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.footer__correo:hover {
+    color: #fff;
+}
+
+.footer__parrafo {
+    padding: 0 1rem;
+    margin: 0.5rem;
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 0% 0;
+    }
+
+    .footer__parrafo {
+        font-size: 0.8rem;
+        padding: 4%;
+    }
+
+    .footer__correo {
+        font-size: 0.85rem;
+    }
+}

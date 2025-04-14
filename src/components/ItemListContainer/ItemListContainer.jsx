@@ -5,13 +5,15 @@ import Loader from '../Loader/Loader';
 import ItemDetail from '../ItemDetail/ItemDetail';
 import './ItemListContainer.css';
 import { useParams } from 'react-router-dom';
+import {productos} from '../../productos.js'
+import { db } from '../../firebaseConfig.js';
+import {collection, addDoc} from 'firebase/firestore'
 
 function ItemListContainer() {
 
     const [todosLosProductos, setTodosLosProductos] = useState([]);
     const [misProductos, setMisProductos] = useState([]);
     const [loading, setLoading] = useState(true);
-
     const { categoria } = useParams();
 
     useEffect(() => {
@@ -36,8 +38,15 @@ function ItemListContainer() {
                 setMisProductos(todosLosProductos);
             };
         }
-
     }, [categoria]);
+
+    // const cargarProductos = () => {
+    //     let refCollection = collection(db, "productos");
+    //     
+    //     productos. forEach((elemento) => {
+    //     addDoc(refCollection, elemento);
+    //     });
+    // };
 
     return (
         <div className="container-cards">
@@ -52,8 +61,9 @@ function ItemListContainer() {
                 />
             ))
             }
+            {/*<button onClick={cargarProductos}>Cargar muchos productos</button>*/}
         </div>
         );
-};
+    };
 
 export default ItemListContainer;

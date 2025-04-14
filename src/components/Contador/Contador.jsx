@@ -1,34 +1,34 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import './Contador.css';
 
-function Contador({ initial = 1, stock = 10, onCountChange }) {
-    const [count, setCount] = useState(initial);
+const Contador = ({ initial, stock, onCountChange }) => {
+  const [count, setCount] = useState(initial);
 
-    const handleAdd = () => {
+  const handleIncrement = () => {
     if (count < stock) {
-        const newCount = count + 1;
-        setCount(newCount);
-        if (onCountChange) onCountChange(newCount);
-        }
-    };
+      const newCount = count + 1;
+      setCount(newCount);
+      onCountChange(newCount);
+    } else {
+      alert("Stock máximo alcanzado");
+    }
+  };
 
-    const handleSubtract = () => {
+  const handleDecrement = () => {
     if (count > 1) {
-        const newCount = count - 1;
-        setCount(newCount);
-        if (onCountChange) onCountChange(newCount);
-        }
-    };
+      const newCount = count - 1;
+      setCount(newCount);
+      onCountChange(newCount);
+    }
+  };
 
-    return (
-    <div className="contador-container">
-        <p>Cantidad: {count}</p>
-        <div className="buttons-container">
-            <button className="btn-modify" onClick={handleSubtract}>-</button>
-            <button className="btn-modify" onClick={handleAdd}>+</button>
-        </div>
+  return (
+    <div className="contador">
+      <button onClick={handleDecrement}>-</button>
+      <span>{count}</span>
+      <button onClick={handleIncrement}>+</button>
     </div>
-    );
-}
+  );
+};
 
 export default Contador;
