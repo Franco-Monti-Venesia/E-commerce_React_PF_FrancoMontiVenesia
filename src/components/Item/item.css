@@ -7,9 +7,10 @@
     transition: 0.3s;
     width: 40%;
     border: solid 1px #928962;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     width: 15rem;
     height: 20rem;
+    margin: 0.1rem;
 }
 
 .card:hover {
@@ -26,4 +27,11 @@
 
 .card-btn:hover{
     background-color: #bdaf73;
+}
+
+.imagen-producto {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
 }

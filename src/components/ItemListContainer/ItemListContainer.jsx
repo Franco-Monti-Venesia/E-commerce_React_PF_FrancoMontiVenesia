@@ -8,7 +8,7 @@ import ProductCard from "../ProductCard/ProductCard";
 import { useParams } from 'react-router-dom';
 import { productos } from '../../productos.js';
 import { db } from '../../firebaseConfig.js';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 
 function ItemListContainer() {
     const [todosLosProductos, setTodosLosProductos] = useState([]);
@@ -17,27 +17,34 @@ function ItemListContainer() {
     const { categoria } = useParams();
 
     useEffect(() => {
-        if (todosLosProductos.length === 0) {
-            fetchData().then(response => {
-                setTodosLosProductos(response);
+        const obtenerProductos = async () => {
+            setLoading(true);
+            try {
+                const productosRef = collection(db, "productos");
+    
+                let consulta;
                 if (categoria) {
-                    const productosFiltrados = response.filter(el => el.categoria === categoria);
-                    setMisProductos(productosFiltrados);
-                    setLoading(false);
+                    consulta = query(productosRef, where("categoria", "==", categoria));
                 } else {
-                    setMisProductos(response);
-                    setLoading(false);
-                };
-            })
-                .catch(err => console.error(err));
-        } else {
-            if (categoria) {
-                const productosFiltrados = todosLosProductos.filter(el => el.categoria === categoria);
-                setMisProductos(productosFiltrados);
-            } else {
-                setMisProductos(todosLosProductos);
-            };
-        }
+                    consulta = productosRef;
+                }
+    
+                const querySnapshot = await getDocs(consulta);
+                const productosFirebase = querySnapshot.docs.map(doc => ({
+                    ...doc.data(),
+                    id: doc.id
+                }));
+    
+                setMisProductos(productosFirebase);
+                setTodosLosProductos(productosFirebase); // Podés seguir guardando todos por si querés usar más adelante
+            } catch (error) {
+                console.error("Error al obtener productos desde Firebase:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+    
+        obtenerProductos();
     }, [categoria]);
 
     // const cargarProductos = () => {
@@ -64,6 +71,7 @@ function ItemListContainer() {
                             id={producto.id} 
                             nombre={producto.nombre} 
                             precio={producto.precio} 
+                            imageUrl={producto.imageUrl}
                         />
                     </div>
                 ))
