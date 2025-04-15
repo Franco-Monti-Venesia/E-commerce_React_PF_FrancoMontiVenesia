@@ -59,21 +59,13 @@ function ItemListContainer() {
             {
                 loading ? <Loader /> :
                 misProductos.map(producto => (
-                    <div key={producto.id} className="card-con-imagen">
-                        {producto.image && (
-                            <img 
-                                src={producto.image} 
-                                alt={producto.nombre} 
-                                className="imagen-producto"
-                            />
-                        )}
-                        <Item 
-                            id={producto.id} 
-                            nombre={producto.nombre} 
-                            precio={producto.precio} 
-                            imageUrl={producto.imageUrl}
-                        />
-                    </div>
+                    <Item 
+                        key={producto.id}
+                        id={producto.id} 
+                        nombre={producto.nombre} 
+                        precio={producto.precio} 
+                        imageUrl={producto.imageUrl}
+                    />
                 ))
             }
             {/* <button onClick={cargarProductos}>Cargar muchos productos</button> */}
