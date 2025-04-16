@@ -2,13 +2,14 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBg1UDHAHrVnliu_GmKVYogkzhG9tADq1Q",
-    authDomain: "pf-react-monti-venesia-franco.firebaseapp.com",
-    projectId: "pf-react-monti-venesia-franco",
-    storageBucket: "pf-react-monti-venesia-franco.firebasestorage.app",
-    messagingSenderId: "1042310314815",
-    appId: "1:1042310314815:web:260487e976d11a75e6b18a"
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
 const app = initializeApp(firebaseConfig);
-export const db = getFirestore( app )
+export const db = getFirestore(app);
+
