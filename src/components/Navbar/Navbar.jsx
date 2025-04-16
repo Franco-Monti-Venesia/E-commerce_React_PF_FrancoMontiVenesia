@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
 import CartWidget from '../CartWidget/CartWidget';
+import logo from '../../assets/logoPastaPng.webp';
 import './Navbar.css';
 
 function Navbar() {
     return (
         <header className='header-nav'>
             <nav className="nav-bar">
-                <img src="src\assets\logoPastaPng.webp" alt="Logo de empresa" className='nav-img'/>
+                <img src={logo} alt="Logo de la empresa" className='nav-img'/>
                 <ul className="nav-bar-options">
                     <li className="nav-bar-item">
                         <Link className='nav-link' to="/">
